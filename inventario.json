@@ -1,0 +1,98 @@
+[
+    {
+      "id_producto": "PL001",
+      "producto": "Monstera Deliciosa",
+      "cantidad_existente": 28,
+      "proveedor": "Vivero Green Life",
+      "valor_compra": 52000,
+      "valor_venta": 85000
+    },
+    {
+      "id_producto": "PL002",
+      "producto": "Sansevieria",
+      "cantidad_existente": 42,
+      "proveedor": "Flora Premium SAS",
+      "valor_compra": 38000,
+      "valor_venta": 60000
+    },
+    {
+      "id_producto": "PL003",
+      "producto": "Pothos",
+      "cantidad_existente": 65,
+      "proveedor": "EcoPlant Colombia",
+      "valor_compra": 22000,
+      "valor_venta": 35000
+    },
+    {
+      "id_producto": "PL004",
+      "producto": "Helecho Boston",
+      "cantidad_existente": 31,
+      "proveedor": "Vivero Natural Garden",
+      "valor_compra": 28000,
+      "valor_venta": 45000
+    },
+    {
+      "id_producto": "PL005",
+      "producto": "Cactus Mini",
+      "cantidad_existente": 95,
+      "proveedor": "Suculentas del Valle",
+      "valor_compra": 10000,
+      "valor_venta": 18000
+    },
+    {
+      "id_producto": "PL006",
+      "producto": "Suculenta Echeveria",
+      "cantidad_existente": 78,
+      "proveedor": "Suculentas del Valle",
+      "valor_compra": 13000,
+      "valor_venta": 22000
+    },
+    {
+      "id_producto": "PL007",
+      "producto": "Orquídea Phalaenopsis",
+      "cantidad_existente": 22,
+      "proveedor": "Orquídeas del Bosque",
+      "valor_compra": 65000,
+      "valor_venta": 95000
+    },
+    {
+      "id_producto": "PL008",
+      "producto": "Ficus Lyrata",
+      "cantidad_existente": 18,
+      "proveedor": "Vivero Green Life",
+      "valor_compra": 98000,
+      "valor_venta": 140000
+    },
+    {
+      "id_producto": "PL009",
+      "producto": "Palma Areca",
+      "cantidad_existente": 20,
+      "proveedor": "Palmas Tropicales SAS",
+      "valor_compra": 82000,
+      "valor_venta": 120000
+    },
+    {
+      "id_producto": "PL010",
+      "producto": "Lavanda",
+      "cantidad_existente": 54,
+      "proveedor": "Hierbas Aromáticas Andinas",
+      "valor_compra": 18000,
+      "valor_venta": 28000
+    },
+    {
+      "id_producto": "PL011",
+      "producto": "Romero",
+      "cantidad_existente": 49,
+      "proveedor": "Hierbas Aromáticas Andinas",
+      "valor_compra": 16000,
+      "valor_venta": 25000
+    },
+    {
+      "id_producto": "PL012",
+      "producto": "Bonsái",
+      "cantidad_existente": 14,
+      "proveedor": "Arte Bonsái Colombia",
+      "valor_compra": 105000,
+      "valor_venta": 150000
+    }
+  ]
