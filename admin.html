@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo - Data Commerce Challenge</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header__brand">
+            <span class="admin-header__logo-icon">📊</span>
+            <span class="admin-header__project-name">Data Commerce Challenge</span>
+        </div>
+
+        <h1 class="admin-header__title">Dashboard de Control</h1>
+
+        <div class="admin-header__user-profile">
+            <div class="admin-header__user-info">
+                <span class="admin-header__user-name">Usuario Administrador</span>
+                <button type="button" class="admin-header__logout-btn">Cerrar Sesión</button>
+            </div>
+            <div class="admin-header__avatar-container">
+                <span class="admin-header__avatar-placeholder">👤</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <nav class="admin-sidebar__nav">
+            <ul class="admin-sidebar__menu">
+                <li class="admin-sidebar__item">
+                    <a href="#welcome" class="admin-sidebar__link admin-sidebar__link--active">
+                        <span class="admin-sidebar__icon">🏠</span> Dashboard
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#sales" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">📈</span> Ventas
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#inventory" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">📦</span> Inventario
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#rankings" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">🏆</span> Rankings
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#insights" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">💡</span> Insights
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#recommendations" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">🎯</span> Recomendaciones
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#settings" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">⚙️</span> Configuración
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="admin-main">
+
+        <!-- Bienvenida -->
+        <section id="welcome" class="admin-section welcome-block">
+            <h2 class="welcome-block__title">Panel de Control Comercial</h2>
+            <p class="welcome-block__description">Bienvenido al sistema de análisis del Data Commerce Challenge. Aquí
+                podrá auditar las métricas mensuales de ventas, controlar los niveles de stock de su inventario y
+                estructurar estrategias basadas en hallazgos automatizados.</p>
+        </section>
+
+        <!-- KPIs -->
+        <section id="kpis" class="admin-section kpis-grid">
+            <div class="kpis-grid__container">
+
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Ventas Totales</h3>
+                    <div class="card-kpi__placeholder" id="kpi-total-sales"></div>
+                </article>
+
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Total de Unidades Vendidas</h3>
+                    <div class="card-kpi__placeholder" id="kpi-total-units"></div>
+                </article>
+
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Productos</h3>
+                    <div class="card-kpi__placeholder" id="kpi-total-products"></div>
+                </article>
+
+                <article class="card-kpi card-kpi--alert">
+                    <h3 class="card-kpi__title">Inventario Bajo</h3>
+                    <div class="card-kpi__placeholder" id="kpi-low-stock"></div>
+                </article>
+
+                <article class="card-kpi card-kpi--highlight">
+                    <h3 class="card-kpi__title">Producto Más Rentable</h3>
+                    <div class="card-kpi__placeholder" id="kpi-most-profitable"></div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Gráficas -->
+        <section id="charts" class="admin-section charts-grid">
+            <div class="charts-grid__container">
+
+                <article class="card-chart">
+                    <h3 class="card-chart__title">Ventas por Día</h3>
+                    <div class="card-chart__body-placeholder" id="chart-sales-by-day"></div>
+                </article>
+
+                <article class="card-chart">
+                    <h3 class="card-chart__title">Top 5 Productos</h3>
+                    <div class="card-chart__body-placeholder" id="chart-top-products"></div>
+                </article>
+
+                <article class="card-chart">
+                    <h3 class="card-chart__title">Inventario</h3>
+                    <div class="card-chart__body-placeholder" id="chart-inventory-status"></div>
+                </article>
+
+                <article class="card-chart">
+                    <h3 class="card-chart__title">Proyección de Demanda</h3>
+                    <div class="card-chart__body-placeholder" id="chart-demand-projection"></div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Rankings -->
+        <section id="rankings" class="admin-section rankings-block">
+            <h2 class="rankings-block__title">Rankings de Rendimiento</h2>
+            <div class="rankings-block__container">
+
+                <article class="card-ranking">
+                    <h3 class="card-ranking__title">Clasificación de Ventas e Ingresos</h3>
+                    <div class="card-ranking__placeholder" id="ranking-sales-container"></div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Tabla de Ventas -->
+        <section id="sales" class="admin-section table-block">
+            <h2 class="table-block__title">Registro Mensual de Ventas</h2>
+            <div class="table-block__responsive-container">
+                <table class="admin-table table-sales">
+                    <thead class="admin-table__head">
+                        <tr class="admin-table__row">
+                            <th class="admin-table__header">Fecha</th>
+                            <th class="admin-table__header">Producto</th>
+                            <th class="admin-table__header">Cantidad</th>
+                            <th class="admin-table__header">Valor Unitario</th>
+                            <th class="admin-table__header">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="admin-table__body" id="table-sales-body">
+                        <!-- Carga dinámica de filas mediante JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tabla de Inventario -->
+        <section id="inventory" class="admin-section table-block">
+            <h2 class="table-block__title">Control General de Inventario</h2>
+            <div class="table-block__responsive-container">
+                <table class="admin-table table-inventory">
+                    <thead class="admin-table__head">
+                        <tr class="admin-table__row">
+                            <th class="admin-table__header">Producto</th>
+                            <th class="admin-table__header">Existencias</th>
+                            <th class="admin-table__header">Valor Compra</th>
+                            <th class="admin-table__header">Valor Venta</th>
+                            <th class="admin-table__header">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="admin-table__body" id="table-inventory-body">
+                        <!-- Carga dinámica de filas mediante JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Insights -->
+        <section id="insights" class="admin-section insights-block">
+            <h2 class="insights-block__title">Hallazgos del Análisis (Insights)</h2>
+            <div class="insights-block__container">
+
+                <article class="card-insight">
+                    <h3 class="card-insight__title">Insight 1</h3>
+                    <div class="card-insight__placeholder" id="insight-1"></div>
+                </article>
+
+                <article class="card-insight">
+                    <h3 class="card-insight__title">Insight 2</h3>
+                    <div class="card-insight__placeholder" id="insight-2"></div>
+                </article>
+
+                <article class="card-insight">
+                    <h3 class="card-insight__title">Insight 3</h3>
+                    <div class="card-insight__placeholder" id="insight-3"></div>
+                </article>
+
+                <article class="card-insight">
+                    <h3 class="card-insight__title">Insight 4</h3>
+                    <div class="card-insight__placeholder" id="insight-4"></div>
+                </article>
+
+                <article class="card-insight">
+                    <h3 class="card-insight__title">Insight 5</h3>
+                    <div class="card-insight__placeholder" id="insight-5"></div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Recomendaciones -->
+        <section id="recommendations" class="admin-section recommendations-block">
+            <h2 class="recommendations-block__title">Recomendaciones Estratégicas</h2>
+            <div class="recommendations-block__container">
+
+                <article class="card-recommendation">
+                    <h3 class="card-recommendation__title">Estrategia Comercial</h3>
+                    <div class="card-recommendation__placeholder" id="recommendation-1"></div>
+                </article>
+
+                <article class="card-recommendation">
+                    <h3 class="card-recommendation__title">Optimización de Inventario</h3>
+                    <div class="card-recommendation__placeholder" id="recommendation-2"></div>
+                </article>
+
+                <article class="card-recommendation">
+                    <h3 class="card-recommendation__title">Campaña de Email Marketing</h3>
+                    <div class="card-recommendation__placeholder" id="recommendation-3"></div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <p class="admin-footer__text">&copy; 2026 Data Commerce Challenge - Todos los derechos reservados.</p>
+        <p class="admin-footer__credits">Desarrollado como solución analítica MVP para e-commerce.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+
+</html>

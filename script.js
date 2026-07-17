@@ -1,5 +1,5 @@
 /* ==========================================================================
-   js/admin.js - Control de Dashboard y Lógica Analítica Consolidada
+   script.js - Data Commerce Challenge Dashboard Logic
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
