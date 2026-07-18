@@ -1,0 +1,6 @@
+﻿id_insight,categoria,descripcion,evidencia
+INS001,Rentabilidad,Pothos fue el producto más rentable del período.,Mayor utilidad acumulada.
+INS002,Ventas,Pothos fue el producto más vendido.,55 unidades vendidas.
+INS003,Inventario,Existen cuatro productos con inventario bajo.,Stock menor a 25 unidades.
+INS004,Tendencia,Las ventas aumentaron al finalizar el mes.,Mayor número de ventas durante los últimos días de mayo.
+INS005,Demanda,Los productos económicos presentan mayor rotación.,"Cactus Mini, Pothos y Suculenta lideran las ventas."

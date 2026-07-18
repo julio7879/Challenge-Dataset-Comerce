@@ -1,0 +1,5 @@
+﻿id_producto,producto,stock_actual,umbral,estado,accion_recomendada
+PL012,Bonsái,14,25,Inventario Bajo,Reabastecer
+PL008,Ficus Lyrata,18,25,Inventario Bajo,Reabastecer
+PL009,Palma Areca,20,25,Inventario Bajo,Reabastecer
+PL007,Orquídea Phalaenopsis,22,25,Inventario Bajo,Reabastecer
