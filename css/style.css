@@ -720,3 +720,305 @@ button,
         padding: 1.5rem 1rem;
     }
 }
+
+/* ==========================================================================
+   EMAIL MARKETING MODULE
+   ========================================================================== */
+.email-marketing-block__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.email-marketing-block__description {
+    font-size: 0.937rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+}
+
+/* KPIs Grid del módulo */
+.email-kpis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+/* Campaign Selector Tabs */
+.em-campaign-selector {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.em-campaign-tab {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.em-campaign-tab:hover {
+    color: var(--text-main);
+    border-color: var(--border-color-hover);
+    background-color: var(--bg-card-hover);
+}
+
+.em-campaign-tab--active {
+    color: var(--color-primary);
+    background-color: var(--bg-card-hover);
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 1px var(--color-highlight);
+}
+
+/* Stock Alert Banner */
+.em-stock-alert {
+    background-color: var(--color-warning-bg);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--color-warning);
+    line-height: 1.5;
+}
+
+/* Campaign Detail Panel */
+.em-campaign-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Meta Column */
+.em-campaign-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.em-meta-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.em-meta-card__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.em-meta-card__value {
+    font-size: 0.937rem;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.em-meta-card--insight {
+    border-left: 3px solid var(--color-highlight);
+}
+
+.em-meta-card--objective {
+    border-left: 3px solid var(--color-success);
+}
+
+.em-meta-card--audience {
+    border-left: 3px solid var(--color-warning);
+}
+
+/* Email Preview */
+.em-email-preview {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.em-email-preview__header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.em-email-preview__header-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.em-email-preview__subject {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.em-email-preview__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.em-email-preview__brand {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.em-email-preview__image {
+    width: 100%;
+    height: 160px;
+    background-color: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.em-email-preview__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.em-email-preview__text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.em-email-preview__cta {
+    display: inline-block;
+    align-self: center;
+    padding: 0.65rem 1.75rem;
+    background-color: var(--color-primary);
+    color: var(--bg-main);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    border: 1px solid var(--color-primary);
+    transition: all var(--transition-fast);
+}
+
+.em-email-preview__cta:hover {
+    background-color: transparent;
+    color: var(--color-primary);
+}
+
+.em-email-preview__footer {
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Send Form */
+.em-send-form {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.em-send-form__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.em-send-form__row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: stretch;
+}
+
+.em-send-form__input {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.em-send-form__input:focus {
+    border-color: var(--color-highlight);
+}
+
+.em-send-form__btn {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--bg-main);
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.em-send-form__btn:hover {
+    background-color: transparent;
+    color: var(--color-primary);
+}
+
+.em-send-form__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.em-send-form__status {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    min-height: 1.25rem;
+}
+
+.em-send-form__status--success {
+    color: var(--color-success);
+}
+
+.em-send-form__status--error {
+    color: var(--color-danger);
+}
+
+.em-send-form__status--sending {
+    color: var(--color-warning);
+}
+
+/* Responsive Email Marketing */
+@media (max-width: 992px) {
+    .em-campaign-detail {
+        grid-template-columns: 1fr;
+    }
+    .email-kpis-grid {
+        grid-template-columns: 1fr;
+    }
+    .em-send-form__row {
+        flex-direction: column;
+    }
+}

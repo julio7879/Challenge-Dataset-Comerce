@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrativo - Data Commerce Challenge</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -62,6 +63,11 @@
                 <li class="admin-sidebar__item">
                     <a href="#recommendations" class="admin-sidebar__link">
                         <span class="admin-sidebar__icon">🎯</span> Recomendaciones
+                    </a>
+                </li>
+                <li class="admin-sidebar__item">
+                    <a href="#email-marketing" class="admin-sidebar__link">
+                        <span class="admin-sidebar__icon">📧</span> Email Marketing
                     </a>
                 </li>
                 <li class="admin-sidebar__item">
@@ -251,6 +257,61 @@
                     <div class="card-recommendation__placeholder" id="recommendation-3"></div>
                 </article>
 
+            </div>
+        </section>
+
+        <!-- Email Marketing -->
+        <section id="email-marketing" class="admin-section email-marketing-block">
+            <h2 class="email-marketing-block__title">📧 Email Marketing — Campañas Basadas en Datos</h2>
+            <p class="email-marketing-block__description">Campañas generadas automáticamente a partir de los insights y el análisis de ventas e inventario del dashboard.</p>
+
+            <!-- KPIs del módulo -->
+            <div class="email-kpis-grid">
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Campañas Generadas</h3>
+                    <div class="card-kpi__placeholder" id="em-kpi-campaigns">3</div>
+                </article>
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Correos Preparados</h3>
+                    <div class="card-kpi__placeholder" id="em-kpi-emails">3</div>
+                </article>
+                <article class="card-kpi">
+                    <h3 class="card-kpi__title">Estado del Sistema</h3>
+                    <div class="card-kpi__placeholder" id="em-kpi-status" style="font-size: 1rem; color: var(--color-success);">Datos Sincronizados ✓</div>
+                </article>
+            </div>
+
+            <!-- Selector de Campaña -->
+            <div class="em-campaign-selector" id="em-campaign-selector">
+                <button class="em-campaign-tab em-campaign-tab--active" data-campaign="0">🌿 Impulso Estrella</button>
+                <button class="em-campaign-tab" data-campaign="1">📦 Liquidación Sobrestock</button>
+                <button class="em-campaign-tab" data-campaign="2">🔄 Reactivación Demanda</button>
+            </div>
+
+            <!-- Alerta de Inventario Bajo -->
+            <div class="em-stock-alert" id="em-stock-alert" style="display: none;"></div>
+
+            <!-- Panel de Detalle de Campaña -->
+            <div class="em-campaign-detail" id="em-campaign-detail">
+                <!-- Columna Izquierda: Metadatos -->
+                <div class="em-campaign-meta" id="em-campaign-meta">
+                    <!-- Inyección dinámica por JS -->
+                </div>
+
+                <!-- Columna Derecha: Vista Previa del Email -->
+                <div class="em-email-preview" id="em-email-preview">
+                    <!-- Inyección dinámica por JS -->
+                </div>
+            </div>
+
+            <!-- Formulario de Envío -->
+            <div class="em-send-form" id="em-send-form">
+                <h3 class="em-send-form__title">📤 Enviar Campaña por Correo</h3>
+                <div class="em-send-form__row">
+                    <input type="email" id="em-recipient-email" class="em-send-form__input" placeholder="correo@destinatario.com" required>
+                    <button type="button" id="em-send-btn" class="em-send-form__btn">Enviar Correo</button>
+                </div>
+                <p class="em-send-form__status" id="em-send-status"></p>
             </div>
         </section>
 

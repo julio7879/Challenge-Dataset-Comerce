@@ -456,6 +456,7 @@ const iniciarDashboard = async () => {
         generarInsights(ventas, inventario);
         generarRecomendaciones(ventas, inventario);
         renderizarGraficas(ventas, inventario);
+        generarEmailMarketing(ventas, inventario);
         
         console.log('⚡ Dashboard comercial inicializado dinámicamente con éxito.');
     } catch (error) {
@@ -470,6 +471,224 @@ const configurarLogout = () => {
         botonLogout.addEventListener('click', () => {
             if (confirm('¿Desea cerrar el panel de control administrativo?')) {
                 window.location.href = 'index.html';
+            }
+        });
+    }
+};
+
+// ==========================================================================
+// MÓDULO DE EMAIL MARKETING – Campañas Basadas en Datos
+// ==========================================================================
+const generarEmailMarketing = (ventas, inventario) => {
+    const metaContainer = document.getElementById('em-campaign-meta');
+    const previewContainer = document.getElementById('em-email-preview');
+    const selectorContainer = document.getElementById('em-campaign-selector');
+    const stockAlertContainer = document.getElementById('em-stock-alert');
+
+    if (!metaContainer || !previewContainer || !selectorContainer) return;
+
+    // ── Cálculos base desde los datasets ──────────────────────
+
+    // Producto con mayor ingreso total (estrella)
+    const ingresosPorProducto = {};
+    ventas.forEach(v => {
+        ingresosPorProducto[v.producto] = (ingresosPorProducto[v.producto] || 0) + v.total;
+    });
+    let productoEstrella = '';
+    let maxIngreso = 0;
+    for (const [prod, ing] of Object.entries(ingresosPorProducto)) {
+        if (ing > maxIngreso) { maxIngreso = ing; productoEstrella = prod; }
+    }
+
+    // Producto con mayor stock (sobrestock)
+    let productoSobrestock = '';
+    let maxStock = 0;
+    inventario.forEach(item => {
+        if (item.cantidad_existente > maxStock) {
+            maxStock = item.cantidad_existente;
+            productoSobrestock = item.producto;
+        }
+    });
+
+    // Producto con más unidades vendidas (demanda)
+    const unidadesPorProducto = {};
+    ventas.forEach(v => {
+        unidadesPorProducto[v.producto] = (unidadesPorProducto[v.producto] || 0) + v.cantidad;
+    });
+    let productoTopDemanda = '';
+    let maxUnidades = 0;
+    for (const [prod, qty] of Object.entries(unidadesPorProducto)) {
+        if (qty > maxUnidades) { maxUnidades = qty; productoTopDemanda = prod; }
+    }
+
+    // Productos con inventario bajo (< 20)
+    const productosStockBajo = inventario.filter(item => item.cantidad_existente < 20);
+    const nombresStockBajo = productosStockBajo.map(p => p.producto);
+
+    // ── Alerta de inventario bajo ─────────────────────────────
+    if (productosStockBajo.length > 0) {
+        stockAlertContainer.style.display = 'block';
+        stockAlertContainer.innerHTML = `⚠️ <strong>Alerta de Inventario:</strong> Se han excluido automáticamente de promociones los siguientes productos por stock inferior a 20 unidades: <strong>${nombresStockBajo.join(', ')}</strong>. Esto previene quiebres de inventario.`;
+    }
+
+    // ── Definición de las 3 campañas ──────────────────────────
+    const campanias = [
+        {
+            nombre: '🌿 Impulso Estrella',
+            insight: `El producto "${productoEstrella}" lidera la facturación con ${formatearMoneda(maxIngreso)} en ingresos totales del período analizado.`,
+            objetivo: 'Incrementar ventas cruzadas y elevar el ticket promedio promocionando productos complementarios al artículo estrella.',
+            audiencia: 'Clientes frecuentes, compradores de plantas de interior premium, y usuarios que ya adquirieron este producto anteriormente.',
+            asunto: `🌿 Descubre por qué "${productoEstrella}" es la favorita del mes`,
+            preheader: `Nuestra planta más vendida te espera. ¡No te la pierdas!`,
+            emailTitulo: `¡"${productoEstrella}" es nuestra Planta Estrella!`,
+            emailTexto: `Nuestro análisis de ventas confirma que "${productoEstrella}" es el producto con mayor facturación este mes, alcanzando ${formatearMoneda(maxIngreso)} en ingresos. Aprovecha esta oportunidad para complementar tu colección con productos similares y obtener un descuento exclusivo.`,
+            emailCta: 'Comprar ahora',
+            emailIcono: '🌿'
+        },
+        {
+            nombre: '📦 Liquidación Sobrestock',
+            insight: `El producto "${productoSobrestock}" registra ${maxStock} unidades en inventario, el nivel más alto de existencias del almacén.`,
+            objetivo: 'Acelerar la rotación de inventario y liberar espacio de almacén mediante ofertas especiales sobre productos con sobrestock.',
+            audiencia: 'Cazadores de ofertas, clientes sensibles al precio, y compradores nuevos que buscan su primera planta.',
+            asunto: `📦 Oferta especial: "${productoSobrestock}" con descuento por tiempo limitado`,
+            preheader: `Aprovecha nuestro amplio stock disponible con precios especiales.`,
+            emailTitulo: `¡Oferta de Liquidación: "${productoSobrestock}"!`,
+            emailTexto: `Contamos con ${maxStock} unidades de "${productoSobrestock}" disponibles en nuestro almacén. Para acelerar su rotación, hemos activado un descuento exclusivo del 20%. ¡Es el momento perfecto para llevarte esta hermosa planta a un precio increíble!`,
+            emailCta: 'Ver oferta',
+            emailIcono: '📦'
+        },
+        {
+            nombre: '🔄 Reactivación Demanda',
+            insight: `El producto "${productoTopDemanda}" acumula ${maxUnidades} unidades vendidas, siendo el artículo con mayor volumen de transacciones del período.`,
+            objetivo: 'Fidelizar a los compradores recurrentes e incentivar la recompra del producto más popular mediante un programa de beneficios.',
+            audiencia: 'Compradores recurrentes, clientes que ya adquirieron este producto, y entusiastas de la jardinería.',
+            asunto: `🔄 "${productoTopDemanda}" sigue siendo la favorita. ¡Repite tu compra!`,
+            preheader: `El producto más vendido te espera con beneficios exclusivos para clientes frecuentes.`,
+            emailTitulo: `¡"${productoTopDemanda}" arrasa en ventas!`,
+            emailTexto: `"${productoTopDemanda}" ha sido adquirido ${maxUnidades} veces este mes, convirtiéndose en nuestro producto estrella en volumen. Como cliente frecuente, te ofrecemos envío gratuito en tu próxima compra y un 10% de descuento adicional. ¡Renueva tu colección!`,
+            emailCta: 'Comprar de nuevo',
+            emailIcono: '🔄'
+        }
+    ];
+
+    // ── Función para renderizar una campaña ───────────────────
+    const renderizarCampania = (index) => {
+        const c = campanias[index];
+
+        // Meta cards
+        metaContainer.innerHTML = `
+            <div class="em-meta-card em-meta-card--insight">
+                <span class="em-meta-card__label">📊 Insight de Origen</span>
+                <p class="em-meta-card__value">${c.insight}</p>
+            </div>
+            <div class="em-meta-card em-meta-card--objective">
+                <span class="em-meta-card__label">🎯 Objetivo Estratégico</span>
+                <p class="em-meta-card__value">${c.objetivo}</p>
+            </div>
+            <div class="em-meta-card em-meta-card--audience">
+                <span class="em-meta-card__label">👥 Público Objetivo</span>
+                <p class="em-meta-card__value">${c.audiencia}</p>
+            </div>
+        `;
+
+        // Email preview
+        previewContainer.innerHTML = `
+            <div class="em-email-preview__header">
+                <span class="em-email-preview__header-label">Vista Previa del Correo</span>
+                <span class="em-email-preview__subject">${c.asunto}</span>
+            </div>
+            <div class="em-email-preview__body">
+                <div class="em-email-preview__brand">📊 Data Commerce Challenge</div>
+                <div class="em-email-preview__image">${c.emailIcono}</div>
+                <h3 class="em-email-preview__title">${c.emailTitulo}</h3>
+                <p class="em-email-preview__text">${c.emailTexto}</p>
+                <span class="em-email-preview__cta">${c.emailCta}</span>
+                <p class="em-email-preview__footer">© 2026 Data Commerce Challenge. Todos los derechos reservados.</p>
+            </div>
+        `;
+    };
+
+    // ── Render inicial ────────────────────────────────────────
+    renderizarCampania(0);
+
+    // ── Interactividad de los tabs ────────────────────────────
+    let campaniaActiva = 0;
+    const tabs = selectorContainer.querySelectorAll('.em-campaign-tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('em-campaign-tab--active'));
+            tab.classList.add('em-campaign-tab--active');
+            campaniaActiva = parseInt(tab.dataset.campaign, 10);
+            renderizarCampania(campaniaActiva);
+        });
+    });
+
+    // ── Envío de correos con EmailJS ──────────────────────────
+    // ╔════════════════════════════════════════════════════════╗
+    // ║  CONFIGURACIÓN DE EMAILJS                             ║
+    // ║  1. Crea cuenta gratuita en https://emailjs.com       ║
+    // ║  2. Conecta tu servicio (Gmail, Outlook, etc.)        ║
+    // ║  3. Crea una plantilla con estas variables:            ║
+    // ║     {{to_email}}, {{subject}}, {{title}},             ║
+    // ║     {{message}}, {{cta}}                              ║
+    // ║  4. Reemplaza los valores abajo con tus IDs:          ║
+    // ╚════════════════════════════════════════════════════════╝
+    const EMAILJS_PUBLIC_KEY = 'HnvbuqG6B4w2T7YYI';
+    const EMAILJS_SERVICE_ID = 'service_o1ddy23';
+    const EMAILJS_TEMPLATE_ID = 'template_gdlw61k';
+
+    // Inicializar EmailJS
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+    }
+
+    const btnEnviar = document.getElementById('em-send-btn');
+    const inputEmail = document.getElementById('em-recipient-email');
+    const statusEl = document.getElementById('em-send-status');
+
+    if (btnEnviar && inputEmail && statusEl) {
+        btnEnviar.addEventListener('click', async () => {
+            const destinatario = inputEmail.value.trim();
+
+            // Validar email
+            if (!destinatario || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(destinatario)) {
+                statusEl.textContent = '❌ Por favor ingresa un correo electrónico válido.';
+                statusEl.className = 'em-send-form__status em-send-form__status--error';
+                return;
+            }
+
+            // Verificar configuración
+            if (EMAILJS_PUBLIC_KEY === 'TU_PUBLIC_KEY') {
+                statusEl.textContent = '⚠️ Configura tus credenciales de EmailJS en script.js para enviar correos reales.';
+                statusEl.className = 'em-send-form__status em-send-form__status--error';
+                return;
+            }
+
+            const c = campanias[campaniaActiva];
+
+            // Estado: enviando
+            btnEnviar.disabled = true;
+            statusEl.textContent = '📤 Enviando correo...';
+            statusEl.className = 'em-send-form__status em-send-form__status--sending';
+
+            try {
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    to_email: destinatario,
+                    subject: c.asunto,
+                    title: c.emailTitulo,
+                    message: c.emailTexto,
+                    cta: c.emailCta
+                });
+
+                statusEl.textContent = `✅ Correo enviado exitosamente a ${destinatario}`;
+                statusEl.className = 'em-send-form__status em-send-form__status--success';
+                inputEmail.value = '';
+            } catch (error) {
+                console.error('Error al enviar email:', error);
+                statusEl.textContent = `❌ Error al enviar: ${error.text || 'Verifica tu configuración de EmailJS'}`;
+                statusEl.className = 'em-send-form__status em-send-form__status--error';
+            } finally {
+                btnEnviar.disabled = false;
             }
         });
     }
