@@ -43,12 +43,29 @@ const validarVentas = (data) => {
     }
 };
 
-// Carga asíncrona de los archivos JSON
+// Carga asíncrona de los archivos JSON o desde localStorage
 const cargarDatasets = async () => {
     let ventas = [];
     let inventario = [];
     let falloVentas = false;
     let falloInventario = false;
+
+    // Intentar leer de localStorage primero para mantener sincronización con la tienda
+    const localVentas = localStorage.getItem('ventas_db');
+    const localInventario = localStorage.getItem('inventario_db');
+
+    if (localVentas && localInventario) {
+        try {
+            ventas = JSON.parse(localVentas);
+            inventario = JSON.parse(localInventario);
+            validarVentas(ventas);
+            validarInventario(inventario);
+            return { ventas, inventario };
+        } catch (e) {
+            console.error('Error procesando localStorage, volviendo a carga original:', e);
+            // Si hay error en caché, forzará la recarga vía fetch
+        }
+    }
 
     try {
         const res = await fetch('ventas.json');
@@ -73,6 +90,10 @@ const cargarDatasets = async () => {
     if (falloVentas || falloInventario) {
         throw new Error(`Carga fallida: ${falloVentas ? 'ventas.json' : ''} ${falloInventario ? 'inventario.json' : ''}`);
     }
+
+    // Inicializar localStorage para uso compartido con la tienda
+    localStorage.setItem('ventas_db', JSON.stringify(ventas));
+    localStorage.setItem('inventario_db', JSON.stringify(inventario));
 
     return { ventas, inventario };
 };
